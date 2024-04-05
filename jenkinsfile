@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout Timeriddle repository
-                git branch: 'master', credentialsId: 'your_credentials_id_here', url: 'https://github.com/PeterPorzuczek/TimeRiddle.git'
+                git branch: 'master', url: 'https://github.com/PeterPorzuczek/TimeRiddle.git'
             }
         }
         
