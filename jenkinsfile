@@ -5,41 +5,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout Timeriddle repository
-                git branch: 'master', url: 'https://github.com/PeterPorzuczek/TimeRiddle.git'
+                git url: 'https://github.com/PeterPorzuczek/TimeRiddle.git'
             }
-        }
-        
-        stage('Build') {
-            steps {
-                // Your build steps here
-                sh 'your_build_command_here'
-            }
-        }
-        
-        stage('Test') {
-            steps {
-                // Your test steps here
-                sh 'your_test_command_here'
-            }
-        }
-        
-        stage('Integration with Timeriddle') {
-            steps {
-                // Integration steps with Timeriddle repository
-                sh 'git clone https://github.com/PeterPorzuczek/TimeRiddle.git'
-                // Additional integration steps as required
-            }
-        }
-    }
-    
-    post {
-        success {
-            echo 'Pipeline succeeded!'
-            // Additional success post-build actions here
-        }
-        failure {
-            echo 'Pipeline failed :('
-            // Additional failure post-build actions here
         }
     }
 }
