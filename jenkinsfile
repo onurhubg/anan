@@ -1,14 +1,45 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'GREETING', defaultValue: 'Hello', description: 'The greeting message')
-        choice(name: 'BRANCH', choices: ['master', 'dev'], description: 'Branch to build')
-    }
+    
     stages {
-        stage('Example') {
+        stage('Checkout') {
             steps {
-                echo "${params.GREETING}, we are building the ${params.BRANCH} branch."
+                // Checkout Timeriddle repository
+                git branch: 'master', credentialsId: 'your_credentials_id_here', url: 'https://github.com/PeterPorzuczek/TimeRiddle.git'
             }
+        }
+        
+        stage('Build') {
+            steps {
+                // Your build steps here
+                sh 'your_build_command_here'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Your test steps here
+                sh 'your_test_command_here'
+            }
+        }
+        
+        stage('Integration with Timeriddle') {
+            steps {
+                // Integration steps with Timeriddle repository
+                sh 'git clone https://github.com/PeterPorzuczek/TimeRiddle.git'
+                // Additional integration steps as required
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+            // Additional success post-build actions here
+        }
+        failure {
+            echo 'Pipeline failed :('
+            // Additional failure post-build actions here
         }
     }
 }
